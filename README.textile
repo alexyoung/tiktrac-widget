@@ -1,0 +1,11 @@
+This is a widget for "Tiktrac":http://tiktrac.com.
+
+It should open in Dashcode.
+
+Documentation is available here: "tiktrac.com/widgets":http://tiktrac.com/widgets
+
+h3. Copyright
+
+* This code is copyright 2008-2009 "Helicoid Limited":http://helicoid.net
+* Based on code created by Thomson Loudon for Helicoid Limited
+* Also based on "older widget code":http://tiktrac.com/tiktrac_widget.zip

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <style type="text/css" title="AppleStyle">
+        @import "Tiktrac.css";
+    </style>
+    <script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleAnimator.js" charset="utf-8"></script>
+    <script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleButton.js" charset="utf-8"></script>
+    <script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleInfoButton.js" charset="utf-8"></script>
+    <script type="text/javascript" src="localizedStrings.js" charset="utf-8"></script>
+    <script type="text/javascript" src="Parts/utilities.js" charset="utf-8"></script>
+    <script type="text/javascript" src="Parts/setup.js" charset="utf-8"></script>
+    <script type="text/javascript" src="Parts/Text.js" charset="utf-8"></script>
+    <script type="text/javascript" src="Parts/InfoButton.js" charset="utf-8"></script>
+    <script type="text/javascript" src="Parts/GlassButton.js" charset="utf-8"></script>
+    <script type="text/javascript" src="Parts/prototype.js" charset="utf-8"></script>
+    <script type="text/javascript" src="TiktracRequest.js" charset="utf-8"></script>
+    <script type="text/javascript" src="TiktracObjects.js" charset="utf-8"></script>
+    <script type="text/javascript" src="Tiktrac.js" charset="utf-8"></script>
+    <script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollbar.js" charset="utf-8"></script>
+    <script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollArea.js" charset="utf-8"></script>
+    <script type="text/javascript" src="Parts/ScrollArea.js" charset="utf-8"></script>
+    <script type="text/javascript" src="Parts/Button.js" charset="utf-8"></script>
+</head>
+<body onload="load();">
+    <div id="front">
+        <img src="Images/Tiktrac.png">
+        <div id="info"></div>
+        <a href="#" title="Add another task to this sheet" id="add">Add task</a>
+        <img src="Images/task_panel.png" id="task-panel">
+        <div id="content" class="content" style="position: absolute; right: 19px; overflow-x: hidden; overflow-y: hidden; left: 15px; bottom: 0px; top: 70px; ">
+            <ul id="tasks">
+            </ul>
+        </div>
+        <div id="task-container">
+            <div style="position: absolute; left: 0px; top: 0px; right: 19px; bottom: 0px; overflow-x: hidden; overflow-y: hidden; "></div></div>
+        <select id="sheets">
+        </select>
+        <div id="text"></div>
+        <div id="text1" style="display: none; "></div>
+        <div id="bug-report"></div>
+        <img src="Images/tiktrac-logo-small.png" id="logo">
+        <div id="Reload"></div>
+    </div>
+    <div id="back">
+        <img id="backImg" src="Images/back.png" alt="">
+        <div id="box"></div>
+        <div id="done"></div>
+        <div id="text4"></div>
+        <input type="text" name="" value="" id="accountname">
+        <input type="text" name="" value="" id="email">
+        <div id="text2"></div>
+        <div id="text3"></div>
+        <input type="password" name="" value="" id="password">
+        <div id="signup_lead_label"></div>
+        <div id="login_feedback" class="text_fied">Login details invalid</div>
+        <div id="check_settings"></div>
+        <div id="sign_up"></div>
+        <img src="Images/Icon.png" id="img">
+        <div id="text5"></div>
+    </div>
+</body>
+</html>

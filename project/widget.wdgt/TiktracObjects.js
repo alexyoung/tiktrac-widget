@@ -72,6 +72,13 @@ var Tiktrac = Class.create({
 	},
     
     refreshData: function() {
+        try {
+            if (typeof(this.tasks.timer) !== 'undefined' && this.tasks.timer.running) {
+                this.tasks.stopTimer()
+            }
+        } catch(exception) {
+        }
+
 		this.sheets = new Sheets('sheets', this);
         this.tasks = new Tasks('tasks', this);
         this.sheets.getSheets();
@@ -173,8 +180,7 @@ var Tiktrac = Class.create({
     changeSheet: function(option) {
         Feedback.busy()
         
-        if (this.tasks.timer.running)
-        {
+        if (this.tasks.timer.running) {
             this.tasks.stopTimer()
         }
 
@@ -244,14 +250,10 @@ var Tasks = Class.create({
 			var statusHTML = (task.status == 'completed') ?	statusHTML = ' checked="checked"' : ''
 			var duration = ''
 
-			if (this.format == 'hours')
-			{
+			if (this.format == 'hours') {
 				var time = this.splitTime(task.duration)
-
 				duration = this.hoursHTML.interpolate({hours: time.hours, minutes: Math.round(time.minutes)})
-			}
-			else if (this.format == 'minutes')
-			{
+			} else if (this.format == 'minutes') {
 				duration = this.minutesHTML.interpolate({minutes: task.duration})
 			}
             
@@ -266,8 +268,7 @@ var Tasks = Class.create({
 			new EditInPlace(task.down('span.description'), this.updateDescription.bind(this), task)
 		}.bind(this))
 
-		if (!this.scrollArea)
-		{
+		if (!this.scrollArea) {
 			scroll_bar = new AppleVerticalScrollbar($("task-container"))
 			scroll_area = new AppleScrollArea($("content"))
 			scroll_area.addScrollbar(scroll_bar)
@@ -326,8 +327,7 @@ var Tasks = Class.create({
         }
     },
 
-	startTimer: function(taskNode)
-	{
+	startTimer: function(taskNode) {
 		this.stopTimer() // Stop any current tasks
 		this.current = taskNode
 		this.current.down('span.seconds.wrapper').show()
@@ -338,12 +338,9 @@ var Tasks = Class.create({
         if (this.task_timer_elapsed[id]) {
             this.timer.elapsed = this.task_timer_elapsed[id];
         } else {
-            if (this.format == 'hours')
-            {
+            if (this.format == 'hours') {
                 this.timer.elapsed = task.duration * 60 * 60
-            }
-            else if (this.format == 'minutes')
-            {
+            } else if (this.format == 'minutes') {
                 this.timer.elapsed = task.duration * 60
             }
         }
@@ -351,16 +348,13 @@ var Tasks = Class.create({
 		this.timer.start(function() {
 			seconds = Math.round(this.timer.elapsed % 60)
 
-			if (this.format == 'hours')
-			{
+			if (this.format == 'hours') {
 				minutes = Math.round(((this.timer.elapsed-seconds) / 60) % 60)
 				hours = Math.round(((this.timer.elapsed / 60) - minutes) / 60)
 				this.current.down('em.hours').innerHTML = hours
 
 				duration = Math.round(this.timer.elapsed / 60) / 60
-			}
-			else if (this.format == 'minutes')
-			{
+			} else if (this.format == 'minutes') {
 				minutes = (this.timer.elapsed-seconds) / 60
 				duration = minutes
 			}
@@ -369,8 +363,7 @@ var Tasks = Class.create({
 			this.current.down('em.seconds').innerHTML = seconds
 
             /* Save to Tiktrac every minute */
-			if (seconds == 0 && minutes > 0)
-			{
+			if (seconds == 0 && minutes > 0) {
 				this.updateDuration(duration)
 			}
 
@@ -380,41 +373,32 @@ var Tasks = Class.create({
 		}.bind(this))
 	},
 
-	stopTimer: function()
-	{
-		if (this.current != null)
-		{
-			this.timer.stop()
-			this.current.down('span.seconds.wrapper').hide()
-			this.current.removeClassName('running')
-            this.updateDuration(duration)
-
-			return true
-		}
-		else
-		{
-			return false
+	stopTimer: function() {
+		if (this.current != null && typeof(duration) !== 'undefined') {
+			this.timer.stop();
+			this.current.down('span.seconds.wrapper').hide();
+			this.current.removeClassName('running');
+            this.updateDuration(duration);
+			return true;
+		} else {
+			return false;
 		}
 	},
 
-	setObservers: function()
-	{
+	setObservers: function() {
 		this.node.select('li.task').each(function(task) {
 			task.down('span.duration').observe('click', function(event) {
-				if (!this.timer.running)
-				{
-					this.startTimer(task)
+				if (!this.timer.running) {
+					this.startTimer(task);
+				} else {
+					this.stopTimer();
 				}
-				else
-				{
-					this.stopTimer()
-				}
-			}.bind(this))
+			}.bind(this));
 
 			task.down('input').observe('click', function(event) {
-				this.updateStatus(task)
-			}.bind(this))
-		}.bind(this))
+				this.updateStatus(task);
+			}.bind(this));
+		}.bind(this));
 	},
 
 	getRunningTask: function(id)
